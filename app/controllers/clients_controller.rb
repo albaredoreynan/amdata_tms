@@ -17,22 +17,22 @@ class ClientsController < ApplicationController
     
     if @client.save
       # render json: @client, status: :created, client: [:api, @client]
-      redirect_to api_clients_path, notice: 'Entry created'
+      redirect_to _clients_path, notice: 'Entry created'
     else
       flash[:alert] = @client.errors.full_messages.first
       render action: "new", id: @client.id
-      # redirect_to new_api_client_path, alert: @client.errors.full_messages.to_sentence
+      # redirect_to new_client_path, alert: @client.errors.full_messages.to_sentence
       # render json: { errors: @client.errors }, status: :unprocessable_entity
     end
   end
 
   def update
     if @client.update(client_params)
-      redirect_to api_clients_path, notice: 'Entry updated'
+      redirect_to _clients_path, notice: 'Entry updated'
     else
       flash[:alert] = @client.errors.full_messages.first
       render action: "new", id: @client.id
-      # redirect_to edit_api_client_path, alert: @client.errors.full_messages.to_sentence
+      # redirect_to edit_client_path, alert: @client.errors.full_messages.to_sentence
       # render json: { errors: @client.errors }, status: :unprocessable_entity
     end
   end
@@ -43,7 +43,7 @@ class ClientsController < ApplicationController
   
   def destroy
     @client.destroy
-    redirect_to api_clients_path, notice: 'Entry successfully deleted'
+    redirect_to _clients_path, notice: 'Entry successfully deleted'
   end
 
   private 
