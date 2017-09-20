@@ -41,6 +41,7 @@
       .form-group
         label Remarks
         = f.text_area :remarks, rows: 3, class: 'form-control'
+        = f.hidden_field :user_id, value: current_user.id
   / .form-group
   /   label for="name"  Company Address
   /   = f.text_area :address, rows: 3, class:'form-control'

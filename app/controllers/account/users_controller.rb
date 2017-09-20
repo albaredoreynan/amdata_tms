@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Account::UsersController < ApplicationController
 	before_filter :set_user, only: [:show, :update, :destroy, :edit] 
 
   def index
@@ -21,25 +21,32 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    
     if @user.save
       # render json: @user, status: :created, user: [:api, @user]
-      redirect_to _users_path, notice: 'Entry created'
+      redirect_to account_users_path, notice: 'Entry created'
     else
-      redirect_to new_user_path, alert: @user.errors.full_messages.first
+      redirect_to new_account_user_path, alert: @user.errors.full_messages.first
       # render json: { errors: @user.errors }, status: :unprocessable_entity
     end
   end
 
   def update
+    # if @user.update(user_params)
+    #   if user_params[:tag] == 'false'
+    #     redirect_to request.referer
+    #   else
+    #     redirect_to account_users_path, notice: 'Entry updated'
+    #   end
+    # else
+    #   redirect_to edit_account_user_path, alert: @user.errors.full_messages.first
+    # end
     if @user.update(user_params)
-      if user_params[:tag] == 'false'
-        redirect_to request.referer
-      else
-        redirect_to _users_path, notice: 'Entry updated'
-      end
+      redirect_to account_users_path, notice: 'Entry updated'
     else
-      redirect_to edit_user_path, alert: @user.errors.full_messages.first
+      flash[:alert] = @user.errors.full_messages.first
+      render action: "new", id: @user.id
+      # redirect_to edit_client_path, alert: @client.errors.full_messages.to_sentence
+      # render json: { errors: @client.errors }, status: :unprocessable_entity
     end
   end
   
@@ -49,7 +56,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to _users_path, notice: 'Entry successfully deleted'
+    redirect_to account_users_path, notice: 'Entry successfully deleted'
     # head :no_content
   end
 
@@ -63,13 +70,14 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    def set_user_from_token
+    def set_account_user_from_token
       @user = User.find(params[:id])
     end
       
     def user_params
-      split_space(params[:user])
-      params.require(:user).permit(:email, :first_name, :last_name, :middle_name, :password, :password_confirmation, 
-      														 :home_address, :contact_number)
+      # split_space(params[:user])
+      params.require(:user).permit(:email, :first_name, :last_name, :middle_name, :password, 
+                                   :password_confirmation, :home_address, :contact_number, 
+                                   :rate_per_hour, :role_type, :job_title, :username)
     end
 end

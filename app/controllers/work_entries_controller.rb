@@ -66,6 +66,6 @@ class WorkEntriesController < ApplicationController
       
     def work_entry_params
       params.require(:work_entry).permit(:entry_date, :client_id, :time_in, :time_out, :details, :user_id, :tasks,
-        :status, :machine_name, :remarks, :active_user)
+        :status, :machine_name, :remarks, :active_user, :user_id)
     end
 end

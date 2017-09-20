@@ -11,20 +11,24 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.fixed-top.bg-inverse
         li.nav-item
           = link_to 'Task Entry', work_entries_path, class:'nav-link'
           /span.sr-only (current)
-      - if params[:controller] == 'clients'
-        li.nav-item.active
-          = link_to 'Clients', clients_path, class:'nav-link'
-      - else
-        li.nav-item
-          = link_to 'Clients', clients_path, class:'nav-link'
-      - if params[:controller] == 'users'
-        li.nav-item.active
-          = link_to 'Employees', users_path, class:'nav-link'
-      - else
-        li.nav-item
-        = link_to 'Employees', users_path, class:'nav-link' 
+      - if is_admin?
+        - if params[:controller] == 'clients'
+          li.nav-item.active
+            = link_to 'Clients', clients_path, class:'nav-link'
+        - else
+          li.nav-item
+            = link_to 'Clients', clients_path, class:'nav-link'
+        - if params[:controller] == 'users'
+          li.nav-item.active
+            = link_to 'Employees', users_path, class:'nav-link'
+        - else
+          li.nav-item
+          = link_to 'Employees', account_users_path, class:'nav-link' 
+    
     form-inline.mt-2.mt-md-0
-      span
-        | Current User
+      span style="color: #fff; padding-right: 30px;"
+        | Welcome &nbsp;
+        = current_user.first_name
+        | &nbsp
       / input.form-control.mr-sm-2 placeholder="Search" type="text" /
-      button.btn.btn-outline-success.my-2.my-sm-0 type="submit"  Logout
+      = link_to 'Logout', destroy_user_session_path, method: :delete, class: "btn btn-outline-success my-2 my-sm-0"

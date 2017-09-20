@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'clients#index'
   resources :clients
-  resources :users
+  namespace :account do
+    resources :users 
+  end
   resources :work_entries
 
 

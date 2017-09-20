@@ -26,7 +26,7 @@
                   tr
                     td = work_entry.entry_date
                     td = work_entry.client.name
-                    td = work_entry.user_id
+                    td = work_entry.user_id.nil? ? '' : work_entry.user.full_name
                     td
                       = link_to 'Edit', edit_work_entry_path(work_entry), class:'btn btn-sm btn-outline-info'
                       |&nbsp;

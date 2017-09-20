@@ -1,0 +1,70 @@
+= form_for [:account, @user], html: { class: '' } do |f|
+  br
+  .row
+    .col
+      .form-group
+        label First Name
+        = f.text_field :first_name, class: 'form-control'
+    .col  
+      .form-group
+        label Middle Name
+        = f.text_field :middle_name, class: 'form-control'
+    .col
+      .form-group
+        label Last Name
+        = f.text_field :last_name, class: 'form-control'
+    .col
+      .form-group
+        label Role Type
+        - @role_type = [['Administrator','Administrator'],['User', 'User']]
+        = f.select :role_type, @role_type, {include_blank: true }, class: 'form-control '
+    .w-100
+    .col  
+      .form-group
+        label Username
+        = f.text_field :username, class: 'form-control' 
+    .col
+      .form-group
+        label Email Address
+        = f.email_field :email, class: 'form-control'
+    .col
+      .form-group
+        label Password
+        = f.password_field :password, class: 'form-control'
+    .col
+      .form-group
+        label Confirm Password
+        = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+    .w-100
+    .col
+      .form-group
+        label Home Address
+        = f.text_area :home_address, rows: 3, class: 'form-control'
+    .w-100
+    .col
+      .form-group
+        label Position/Job Title
+        = f.text_field :job_title, class: 'form-control'
+    .col
+      .form-group
+        label Contact Info
+        = f.text_field :contact_number, class: 'form-control'
+    .col
+      .form-group
+        label Rate per Hour
+        = f.text_field :rate_per_hour, class: 'form-control'
+  br
+  input.btn.btn-primary type="submit"
+  | &nbsp;  
+  = link_to 'Cancel', account_users_path, class: 'btn btn-warning'
+ 
+// javascript:
+//   $(document).ready(function(){
+//     $('.datepicker2').datepicker();
+//   });
+
+
+
+/ :email, :first_name, :last_name, :middle_name, :password, 
+/ :password_confirmation, :home_address, :contact_number, 
+/ :rate_per_hour, :role_type
