@@ -1,0 +1,67 @@
+= form_for @work_entry, html: { class: '' } do |f|
+  br
+  .row
+    .col
+      .form-group
+        label for="name" Entry Date
+        = f.text_field :entry_date, class: 'form-control datepicker2'
+    .col  
+      .form-group
+        label for="name" Time In:
+        = f.text_field :time_in, class: 'form-control'
+    .col
+      .form-group
+        label for="name" Time Out:
+        = f.text_field :time_out, class: 'form-control'
+    .w-100
+    .col  
+      .form-group
+        label Client
+        = f.select :client_id, Client.all.map{ |e| [e.name, e.id] }, {include_blank: true }, class: 'form-control ' 
+    .col
+      .form-group
+        label Machine Name
+        = f.text_field :machine_name, class: 'form-control'
+    .col
+      .form-group
+        label Status
+        - @status = [['Pending','Pending'],['Ongoing', 'Ongoing'],['Completed', 'Completed'], ['Under Construction', 'Under Construction']]
+        = f.select :status, @status, {include_blank: true }, class: 'form-control '
+    .w-100
+    .col
+      .form-group
+        label Task/Issue
+        = f.text_area :tasks, rows: 3, class: 'form-control'
+    .col
+      .form-group
+        label Solution
+        = f.text_area :details, rows: 3, class: 'form-control'
+    .w-100
+    .col
+      .form-group
+        label Remarks
+        = f.text_area :remarks, rows: 3, class: 'form-control'
+  / .form-group
+  /   label for="name"  Company Address
+  /   = f.text_area :address, rows: 3, class:'form-control'
+  /   / small#emailHelp.form-text.text-muted Enter Company Name on the Input Box.
+  / .form-group
+  /   label for="name"  Contact Person
+  /   = f.text_field :contact_person, class:'form-control'
+  /   / small#emailHelp.form-text.text-muted Enter Company Name on the Input Box.
+  / .form-group
+  /   label for="name"  Mobile/Contact Info
+  /   = f.text_field :contact_info, class:'form-control'
+  /   /small#emailHelp.form-text.text-muted Enter Company Name on the Input Box.
+  br
+  input.btn.btn-primary type="submit"
+  | &nbsp;  
+  = link_to 'Cancel', clients_path, class: 'btn btn-warning'
+ 
+javascript:
+  $(document).ready(function(){
+    $('.datepicker2').datepicker();
+  });
+
+/ :entry_date, :client_id, :time_in, :time_out, :details, :user_id, :tasks,
+/         :status, :machine_name, :remarks, :active_user

@@ -2,16 +2,17 @@ class UsersController < ApplicationController
 	before_filter :set_user, only: [:show, :update, :destroy, :edit] 
 
   def index
-    if current_user.role.access_level == 'Administrator' || current_user.role.access_level == 'All'
-      # @users = current_user.department.nil? ? User.all : User.where(department: current_user.department)
-      # render json: @users
-      split_space(params["q"]) if params["q"].present?
-      @q = User.ransack(params[:q])
-      @users = @q.result.order("created_at asc").paginate(:page => params[:page], :per_page => 10)
-    else
-      # redirect_to _logreqs_path
-      redirect_to dashboard_path
-    end
+    # if current_user.role.access_level == 'Administrator' || current_user.role.access_level == 'All'
+    #   # @users = current_user.department.nil? ? User.all : User.where(department: current_user.department)
+    #   # render json: @users
+    #   split_space(params["q"]) if params["q"].present?
+    #   @q = User.ransack(params[:q])
+    #   @users = @q.result.order("created_at asc").paginate(:page => params[:page], :per_page => 10)
+    # else
+    #   # redirect_to _logreqs_path
+    #   redirect_to dashboard_path
+    # end
+    @users = User.all
   end
 
   def split_space(contents)

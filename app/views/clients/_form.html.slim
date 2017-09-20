@@ -1,0 +1,23 @@
+= form_for @client, html: { class: '' } do |f|
+  br
+  .form-group
+    label for="name"  Company Name
+    = f.text_field :name, class:'form-control'
+    small#emailHelp.form-text.text-muted Enter Company Name on the Input Box.
+  .form-group
+    label for="name"  Company Address
+    = f.text_area :address, rows: 3, class:'form-control'
+    / small#emailHelp.form-text.text-muted Enter Company Name on the Input Box.
+  .form-group
+    label for="name"  Contact Person
+    = f.text_field :contact_person, class:'form-control'
+    / small#emailHelp.form-text.text-muted Enter Company Name on the Input Box.
+  .form-group
+    label for="name"  Mobile/Contact Info
+    = f.text_field :contact_info, class:'form-control'
+    /small#emailHelp.form-text.text-muted Enter Company Name on the Input Box.
+  br
+  input.btn.btn-primary type="submit"
+  | &nbsp;  
+  = link_to 'Cancel', clients_path, class: 'btn btn-warning'
+ 

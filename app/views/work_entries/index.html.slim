@@ -1,0 +1,34 @@
+= render "layouts/main_nav"
+.container-fluid
+  br
+  .row
+    .col-1
+    .col-10
+      .container
+        .row
+          h2 Manage Task Entries
+        .row.float-right
+            = link_to 'New Entry', new_work_entry_path, class:'btn btn-outline-success my-2 my-sm-0'
+      br
+      br
+      .container
+        .row
+          .table-responsive
+            table.table.table-striped
+              thead.table-inverse
+                tr
+                  th Entry Date
+                  th Client
+                  th Assigned User
+                  th Action
+              tbody
+                - @work_entries.each do |work_entry|
+                  tr
+                    td = work_entry.entry_date
+                    td = work_entry.client.name
+                    td = work_entry.user_id
+                    td
+                      = link_to 'Edit', edit_work_entry_path(work_entry), class:'btn btn-sm btn-outline-info'
+                      |&nbsp;
+                      = link_to 'Delete', work_entries_path(work_entry), method: :delete, 'data-confirm' => 'Are you sure you want to delete this entry?', class:'btn btn-sm btn-outline-danger'
+    .col-1

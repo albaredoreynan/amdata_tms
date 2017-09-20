@@ -1,15 +1,30 @@
 nav.navbar.navbar-toggleable-md.navbar-inverse.fixed-top.bg-inverse
   button.navbar-toggler.navbar-toggler-right.hidden-lg-up aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarsExampleDefault" data-toggle="collapse" type="button" 
     span.navbar-toggler-icon
-  a.navbar-brand href="#"  EMPLOYEE TASK RECORD 
+  a.navbar-brand href="#" AMDATA-TMS 
   #navbarsExampleDefault.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
-      li.nav-item.active
-        a.nav-link href="#" 
-          | Task
-          span.sr-only (current)
-      li.nav-item
-        a.nav-link href="#"  Profile
-    form.form-inline.mt-2.mt-md-0
-      input.form-control.mr-sm-2 placeholder="Search" type="text" /
-      button.btn.btn-outline-success.my-2.my-sm-0 type="submit"  Search
+      - if params[:controller] == 'work_entries'
+        li.nav-item.active
+          = link_to 'Task Entry', work_entries_path, class:'nav-link'
+      - else
+        li.nav-item
+          = link_to 'Task Entry', work_entries_path, class:'nav-link'
+          /span.sr-only (current)
+      - if params[:controller] == 'clients'
+        li.nav-item.active
+          = link_to 'Clients', clients_path, class:'nav-link'
+      - else
+        li.nav-item
+          = link_to 'Clients', clients_path, class:'nav-link'
+      - if params[:controller] == 'users'
+        li.nav-item.active
+          = link_to 'Employees', users_path, class:'nav-link'
+      - else
+        li.nav-item
+        = link_to 'Employees', users_path, class:'nav-link' 
+    form-inline.mt-2.mt-md-0
+      span
+        | Current User
+      / input.form-control.mr-sm-2 placeholder="Search" type="text" /
+      button.btn.btn-outline-success.my-2.my-sm-0 type="submit"  Logout

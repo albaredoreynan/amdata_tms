@@ -17,7 +17,7 @@ class ClientsController < ApplicationController
     
     if @client.save
       # render json: @client, status: :created, client: [:api, @client]
-      redirect_to _clients_path, notice: 'Entry created'
+      redirect_to clients_path, notice: 'Entry created'
     else
       flash[:alert] = @client.errors.full_messages.first
       render action: "new", id: @client.id
@@ -28,7 +28,7 @@ class ClientsController < ApplicationController
 
   def update
     if @client.update(client_params)
-      redirect_to _clients_path, notice: 'Entry updated'
+      redirect_to clients_path, notice: 'Entry updated'
     else
       flash[:alert] = @client.errors.full_messages.first
       render action: "new", id: @client.id
@@ -40,10 +40,15 @@ class ClientsController < ApplicationController
   def new
     @client = Client.new
   end
+
+  def edit
+    @client = Client.find(params[:id])
+  end
+
   
   def destroy
     @client.destroy
-    redirect_to _clients_path, notice: 'Entry successfully deleted'
+    redirect_to clients_path, notice: 'Entry successfully deleted'
   end
 
   private 

@@ -6,11 +6,13 @@ default: &default
 development:
   <<: *default
   database: time_entry_sys_development
-  username: ken
+  username: reynan
+  password: admin2016
 test:
   <<: *default
   database: time_entry_sys_test
-  username: ken
+  username: reynan
+  password: admin2016
   
 production:
   <<: *default

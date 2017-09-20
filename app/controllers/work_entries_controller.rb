@@ -9,7 +9,6 @@ class WorkEntriesController < ApplicationController
 
   def new
     @work_entry = WorkEntry.new
-    @clients = Client.all
   end
   
   def edit
@@ -66,6 +65,7 @@ class WorkEntriesController < ApplicationController
     end
       
     def work_entry_params
-      params.require(:work_entry).permit(:entry_date, :client_id, :time_in, :time_out, :details, :user_id)
+      params.require(:work_entry).permit(:entry_date, :client_id, :time_in, :time_out, :details, :user_id, :tasks,
+        :status, :machine_name, :remarks, :active_user)
     end
 end
